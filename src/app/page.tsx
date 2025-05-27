@@ -8,7 +8,7 @@ export default function Home() {
         welcome to simple chat
       </div>
       <div className="px-4">
-        <Link href="/login">
+        <Link href="/pages/login">
           <Button variant="ghost" className="text-white text-4xl">
             ➛
           </Button>

@@ -1,3 +1,11 @@
+export interface User {
+  id: string;
+  name: string;
+  avatar: string;
+  status?: string;
+  updatedAt: string; // terakhir ubah profil
+}
+
 export interface Contact {
   id: string;
   name: string;
@@ -10,8 +18,10 @@ export interface Contact {
 
 export interface Message {
   id: string;
+  chatId: string;
+  senderId: string;
   content: string;
-  sender: string;
+  type: "text" | "image" | "video"; // dst
   timestamp: string;
-  isMe: boolean;
+  status: "sent" | "delivered" | "read";
 }
