@@ -15,13 +15,14 @@ import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AvatarFallback } from "@/components/ui/avatar";
-
+import { useRouter } from "next/navigation";
 import { Message, Contact } from "@/types/chat";
 
 export default function ChatApp() {
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [messageInput, setMessageInput] = useState("");
+  const router = useRouter();
 
   const contacts: Contact[] = [
     {
@@ -132,14 +133,21 @@ export default function ChatApp() {
     }
   };
 
+  const handleSetting = () => {
+    router.push("/settings");
+  };
+
   return (
     <div className="flex flex-col h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-gray-100 border-b">
         <div className="container mx-auto py-3 flex items-center">
           <Avatar className="h-8 w-8 mr-4 bg-gray-300">
-            <AvatarFallback>CN</AvatarFallback>
+            <Button onClick={handleSetting}>
+              <AvatarFallback>CN</AvatarFallback>
+            </Button>
           </Avatar>
+
           <div className="relative flex-1 max-w-2xl mx-auto">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <Search className="h-4 w-4 text-gray-400" />

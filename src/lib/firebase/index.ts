@@ -1,11 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  GoogleAuthProvider,
-  TwitterAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,16 +20,28 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+export const db = getFirestore(app);
+
 auth.languageCode = "en";
-const provider = new GoogleAuthProvider();
+
+const googleProvider = new GoogleAuthProvider();
 
 export const signWithGoogle = async () => {
   try {
-    const result = await signInWithPopup(auth, provider);
+    const result = await signInWithPopup(auth, googleProvider);
     const credential = GoogleAuthProvider.credentialFromResult(result);
+
     const user = result.user;
     const token = credential?.accessToken;
-    return { user, credential, token };
+
+    const uid = user.uid;
+
+    const userDocRef = doc(db, "users", uid);
+    const userSnap = await getDoc(userDocRef);
+
+    const isNew = !userSnap.exists();
+
+    return { user, credential, token, isNew };
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(error.message);
@@ -43,19 +51,20 @@ export const signWithGoogle = async () => {
     }
   }
 };
-export const signWithTwitter = async () => {
-  try {
-    const result = await signInWithPopup(auth, provider);
-    const credential = TwitterAuthProvider.credentialFromResult(result);
-    const user = result.user;
-    const token = credential?.accessToken;
-    return { user, credential, token };
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    } else {
-      console.error("Google login failed:", error);
-      throw new Error("Unknown error occurred during Google sign-in.");
-    }
-  }
-};
+
+// export const signWithTwitter = async () => {
+//   try {
+//     const result = await signInWithPopup(auth, twitterProvider);
+//     const credential = TwitterAuthProvider.credentialFromResult(result);
+//     const user = result.user;
+//     const token = credential?.accessToken;
+//     return { user, credential, token };
+//   } catch (error) {
+//     if (error instanceof Error) {
+//       throw new Error(error.message);
+//     } else {
+//       console.error("Twitter login failed:", error);
+//       throw new Error("Unknown error occurred during Twitter sign-in.");
+//     }
+//   }
+// };

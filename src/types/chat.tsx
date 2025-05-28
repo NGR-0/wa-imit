@@ -1,14 +1,14 @@
 export interface User {
-  id: string;
-  name: string;
+  username: string;
   avatar: string;
-  status?: string;
+  bio?: string;
+  online: boolean;
+  createdAt: string;
   updatedAt: string; // terakhir ubah profil
 }
 
 export interface Contact {
-  id: string;
-  name: string;
+  username: string;
   avatar: string;
   lastMessage: string;
   time: string;
