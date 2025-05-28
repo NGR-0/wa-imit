@@ -7,7 +7,7 @@ import { db } from "@/lib/firebase";
 import { doc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 
-export default function Settings() {
+const Settings = () => {
   const [loading, setLoading] = useState(false);
   const [initialData, setInitialData] = useState({ username: "", bio: "" });
   const router = useRouter();
@@ -61,4 +61,6 @@ export default function Settings() {
       submitLabel="Perbarui"
     />
   );
-}
+};
+
+export default Settings;

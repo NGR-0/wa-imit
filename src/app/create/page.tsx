@@ -7,7 +7,7 @@ import { db } from "@/lib/firebase";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 
-export default function CreateProfile() {
+const CreateProfile = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -45,4 +45,6 @@ export default function CreateProfile() {
       loading={loading}
     />
   );
-}
+};
+
+export default CreateProfile;

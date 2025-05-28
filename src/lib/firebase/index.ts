@@ -19,7 +19,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+export const auth = getAuth(app);
 export const db = getFirestore(app);
 
 auth.languageCode = "en";
@@ -51,20 +51,3 @@ export const signWithGoogle = async () => {
     }
   }
 };
-
-// export const signWithTwitter = async () => {
-//   try {
-//     const result = await signInWithPopup(auth, twitterProvider);
-//     const credential = TwitterAuthProvider.credentialFromResult(result);
-//     const user = result.user;
-//     const token = credential?.accessToken;
-//     return { user, credential, token };
-//   } catch (error) {
-//     if (error instanceof Error) {
-//       throw new Error(error.message);
-//     } else {
-//       console.error("Twitter login failed:", error);
-//       throw new Error("Unknown error occurred during Twitter sign-in.");
-//     }
-//   }
-// };

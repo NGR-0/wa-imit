@@ -21,14 +21,14 @@ interface ProfileFormProps {
   submitLabel?: string;
 }
 
-export default function ProfileForm({
+const ProfileForm: React.FC<ProfileFormProps> = ({
   initialUsername = "",
   initialBio = "",
   onSubmitAction,
   loading = false,
   title,
   submitLabel = "Simpan",
-}: ProfileFormProps) {
+}) => {
   const {
     register,
     handleSubmit,
@@ -94,4 +94,6 @@ export default function ProfileForm({
       </div>
     </div>
   );
-}
+};
+
+export default ProfileForm;

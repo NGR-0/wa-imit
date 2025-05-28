@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { signWithGoogle } from "@/lib/firebase";
 
-export default function Login() {
+const SignIn = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
@@ -45,4 +45,6 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};
+
+export default SignIn;
