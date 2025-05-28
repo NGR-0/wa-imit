@@ -1,13 +1,16 @@
 export interface User {
+  id: string;
   username: string;
   avatar: string;
   bio?: string;
   online: boolean;
+  read: boolean;
   createdAt: string;
   updatedAt: string; // terakhir ubah profil
 }
 
 export interface Contact {
+  id: string;
   username: string;
   avatar: string;
   lastMessage: string;
@@ -18,10 +21,8 @@ export interface Contact {
 
 export interface Message {
   id: string;
-  chatId: string;
-  senderId: string;
   content: string;
-  type: "text" | "image" | "video"; // dst
+  sender: string; // e.g., "John Doe" or "Me"
   timestamp: string;
-  status: "sent" | "delivered" | "read";
+  isMe: boolean;
 }
